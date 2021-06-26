@@ -25,7 +25,7 @@ const linkGen = async () => {
 
 const upload = async () => {
   axios
-    .post("http://localhost:8080/upload", new FormData(formElem), { headers: headers})
+    .post("https://synlab-carepath.herokuapp.com/upload", new FormData(formElem), { headers: headers})
     .then((response) => { 
       if (response.status == "200") {
         localStorage.setItem('name', response.data.name);
