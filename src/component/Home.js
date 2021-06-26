@@ -5,13 +5,16 @@ import axios from 'axios';
 function Home() {
     const [inputValue, setInputValue] = useState('') 
     const [inputForm, setInputForm] = useState('') 
-    
+    const [isLoading, setLoading] = useState(false)
+
+
     const linkGen = async () => {
         let pdfName = localStorage.getItem('synlab-name');
         setInputValue(`https://rv.synlab-pathcare.com/verify/${pdfName}`)
         localStorage.removeItem('synlab-name')
     }
     const upload = async (e) => {
+       setLoading(true);
         e.preventDefault();
         let formData = new FormData();    //formdata object
         formData.append('pdf', inputForm);   //append the values with key, value pair
@@ -19,6 +22,7 @@ function Home() {
         axios
           .post("https://synlab-carepath.herokuapp.com/upload", formData, { headers: headers})
           .then((response) => { 
+            setLoading(false);
             if (response.status === 200) {
               localStorage.setItem('synlab-name', response.data.name);
               alert('Uploaded Succesfully')
@@ -36,9 +40,15 @@ function Home() {
                     </div>
                     <form onSubmit={(e)=>{upload(e)}} id="formElem">   
                         <input type="file" id="myFile"  onChange={e=>{setInputForm(e.target.files[0]);}} className="uploadform" name="pdf" /> 
-                        <div className="pad-top">  
-                            <input type="submit" className="btn-edit" id="btnEdit" />
-                            <button type= "button" onClick={linkGen} className="btn-edit" id="btnGen"> Generate Link </button>
+                        <div className="pad-top">    
+                        <div> 
+                           
+                        <button type="submit" className="btn-edit" id="btnEdit"  >  { isLoading ? <i className="fas fa-circle-notch fa-spin"/> : ''}  Submit </button>
+                        <button type= "button" onClick={linkGen} className="btn-edit" id="btnGen"> Generate Link </button>
+                        
+
+                        </div>
+                           
                         </div>
                         
                         <input type="text" value={inputValue} className="form-edii" disabled id="genLinkUrl" />
