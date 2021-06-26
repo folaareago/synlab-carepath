@@ -27,7 +27,7 @@ function Home() {
               localStorage.setItem('synlab-name', response.data.name);
               alert('Uploaded Succesfully')
             } else {
-              console.log("Unable to upload file.");
+              alert("Please, use a valid file.");
             }
           })
           .catch((error) => console.error(error.message));
