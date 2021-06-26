@@ -10,6 +10,9 @@ function App () {
              <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/verify/synlab/:id' component={Retrive}/>
+            <Route path='/ola' component={() => {return(
+		<p>Homepage</p>
+	);}}/>
              </Switch>
          </Router> 
    
