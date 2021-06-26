@@ -15,7 +15,7 @@ function Home() {
         e.preventDefault();
         let formData = new FormData();    //formdata object
         formData.append('pdf', inputForm);   //append the values with key, value pair
-        const headers = { 'content-type': 'multipart/form-data' }
+        const headers = { 'content-type': 'multipart/form-data', 'withCredentials': true, }
         axios
           .post("https://synlab-carepath.herokuapp.com/upload", formData, { headers: headers})
           .then((response) => { 
