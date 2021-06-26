@@ -1,4 +1,4 @@
 # Redirects from what the browser requests to what we serve
 /                            /
-/about                       /about
+/ola                       /ola
 /verify/synlab/:id           /verify/synlab/:id
