@@ -18,9 +18,9 @@ const headers = {
 }
 
 const linkGen = async () => {
-  pdfName = localStorage.getItem('name');
+  pdfName = localStorage.getItem('synlab-name');
   genLinkUrl.value = `https://rv.synlab-pathcare.com/verify/${pdfName}`;
-  localStorage.removeItem('name')
+  localStorage.removeItem('synlab-name')
 }
 
 const upload = async () => {
@@ -28,7 +28,7 @@ const upload = async () => {
     .post("https://synlab-carepath.herokuapp.com/upload", new FormData(formElem), { headers: headers})
     .then((response) => { 
       if (response.status == "200") {
-        localStorage.setItem('name', response.data.name);
+        localStorage.setItem('synlab-name', response.data.name);
         alert('Uploaded Succesfully')
       } else {
         console.log("Unable to upload file.");
